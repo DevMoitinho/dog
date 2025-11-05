@@ -5,7 +5,10 @@
 
 int main(int argc, char *argv[]){
 	if(argc < 2){
-		printf("Too few arguments. %s must recive at least 2 arguments.\n", argv[0]);
+		int c;
+		while((c = fgetc(stdin)) != EOF){
+			fputc(c,stdout);
+		}
 	}else if(argc == 3){
 		
 		if(strcmp("-n",argv[2]) == 0){
@@ -20,7 +23,8 @@ int main(int argc, char *argv[]){
 			}
 			close(file);
 			int line = 1;
-			for(int i = 0; i<strlen(buffer);i++){
+			printf("%d ",line++);
+			for(int i = 0; i<strlen(buffer)-1;i++){
 				if(buffer[i] == '\n'){
 					printf("\n%d ", line++);
 				}else{
@@ -42,8 +46,13 @@ int main(int argc, char *argv[]){
 			return 1;
 		}
 		close(file);
-		printf(buffer);
-
+		for(int i = 0; i<strlen(buffer)-1;i++){
+			if(buffer[i] == '\n'){
+				printf("\n");
+			}else{
+				printf("%c",buffer[i]);
+			}
+		}
 
 	}
 	printf("\n");
